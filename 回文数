@@ -1,0 +1,37 @@
+#include <iostream>
+#include <cstdlib>
+#include <windows.h>
+using namespace std;
+
+class Palindrome
+{
+public:
+	bool judge(int num)
+	{/*特殊情况:当num为负数时肯定不是回文数;当num个位数为0时,如果num不是0,则num肯定不是回文数*/
+		if((num != 0 && num % 10 == 0) || num < 0)
+			return false;
+		/*不使用字符串,使整形变量的一半反转*/
+		int demonum = 0;
+		while (num > demonum)
+		{
+			demonum = demonum * 10 + num % 10;
+			num = num / 10;
+		}
+		/*当num为偶数时,为第一种情况;当num为奇数时,第二种情况*/
+		return ((num == demonum) || (num == demonum / 10));
+	}
+};
+
+int main()
+{
+	int num;
+	cout << "请输入一个数判断是否为回文数:";
+	cin >> num;
+	Palindrome a;
+	if (a.judge(num) == true)
+		cout << num << "是回文数" << endl;
+	else
+		cout << num << "不是回文数" << endl;
+	system("pause");
+	return 0;
+}
